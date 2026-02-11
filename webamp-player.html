@@ -6,30 +6,25 @@
 <title>Plants & Animals</title>
 
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: black;
-    overflow: hidden;
-  }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: black;
+  height: 100%;
+  overflow: hidden;
+}
 
-  #app {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #app > div {
-    transform-origin: center;
-  }
+#app {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
 </head>
 
 <body>
-
 <div id="app"></div>
 
 <script src="https://unpkg.com/webamp@1.5.0/built/webamp.bundle.min.js"></script>
@@ -39,11 +34,9 @@ const Webamp = window.Webamp;
 
 const webamp = new Webamp({
   initialTracks: [
-
-    { metaData: { title: "amaesi" }, url: "./amaesi.mp3" },
+    { metaData: { title: "ameasi" }, url: "./ameasi.mp3" },
     { metaData: { title: "bird" }, url: "./bird.mp3" },
     { metaData: { title: "choir" }, url: "./choir.mp3" },
-
     { metaData: { title: "don01" }, url: "./don01.mp3" },
     { metaData: { title: "don02" }, url: "./don02.mp3" },
     { metaData: { title: "don03" }, url: "./don03.mp3" },
@@ -55,28 +48,21 @@ const webamp = new Webamp({
     { metaData: { title: "don09" }, url: "./don09.mp3" },
     { metaData: { title: "don10" }, url: "./don10.mp3" },
     { metaData: { title: "don11" }, url: "./don11.mp3" },
-
     { metaData: { title: "kat01" }, url: "./kat01.mp3" },
     { metaData: { title: "likehell" }, url: "./likehell.mp3" },
-
     { metaData: { title: "rua01" }, url: "./rua01.mp3" },
     { metaData: { title: "rua02" }, url: "./rua02.mp3" },
     { metaData: { title: "rua03" }, url: "./rua03.mp3" },
-
     { metaData: { title: "select" }, url: "./select.mp3" },
     { metaData: { title: "sup01" }, url: "./sup01.mp3" },
-
     { metaData: { title: "tar01" }, url: "./tar01.mp3" },
     { metaData: { title: "tar02" }, url: "./tar02.mp3" },
     { metaData: { title: "tar03" }, url: "./tar03.mp3" },
     { metaData: { title: "tar04" }, url: "./tar04.mp3" },
     { metaData: { title: "tar05" }, url: "./tar05.mp3" },
-
     { metaData: { title: "wan01" }, url: "./wan01.mp3" },
     { metaData: { title: "wind" }, url: "./wind.mp3" }
-
   ],
-
   initialSkin: {
     url: "./Weed_Amp_bulb_4.wsz"
   }
@@ -84,24 +70,20 @@ const webamp = new Webamp({
 
 webamp.renderWhenReady(document.getElementById("app")).then(() => {
 
-  const container = document.querySelector("#app > div");
+  const container = document.querySelector(".webamp");
 
-  function scalePlayer() {
-  const baseWidth = 275;
-  const baseHeight = 400;
+  function resize() {
+    const scale = Math.min(
+      window.innerWidth / 275,
+      window.innerHeight / 400
+    );
 
-  const scale = Math.min(
-    window.innerWidth / baseWidth,
-    window.innerHeight / baseHeight
-  );
+    container.style.transformOrigin = "center center";
+    container.style.transform = `scale(${scale})`;
+  }
 
-  container.style.transform = `scale(${scale * 1.7})`;
-}
-
-
-  scalePlayer();
-  window.addEventListener("resize", scalePlayer);
-
+  resize();
+  window.addEventListener("resize", resize);
 });
 </script>
 
