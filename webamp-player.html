@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Webamp</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/webamp@1.5.0/dist/webamp.min.css">
+</head>
+
+<body style="margin:0; background:transparent; overflow:hidden;">
+
+<div id="webamp"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/webamp@1.5.0/dist/webamp.min.js"></script>
+
+<script>
+  const webamp = new Webamp({
+    initialTracks: [
+      {
+        metaData: {
+          artist: "Test Track",
+          title: "It Works"
+        },
+        url: "https://archive.org/download/The_Entertainer_1902_Joplin/Scott_Joplin_-_The_Entertainer.mp3"
+      }
+    ],
+    initialSkin: {
+      url: "./Cannabis_Sativa.wsz"
+    },
+    attachTo: document.getElementById("webamp")
+  });
+
+  webamp.renderWhenReady();
+</script>
+
+</body>
+</html>
