@@ -1,66 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Webamp Player</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Webamp Player</title>
 
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/webamp@latest/build/webamp.css"
-/>
+  <!-- Webamp CSS (stable) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/webamp@1.5.0/dist/webamp.min.css" />
 
-<style>
-html, body {
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  overflow: hidden;
-}
-</style>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background: #ffffff; /* change to transparent later */
+    }
+    #webamp {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
 </head>
 
 <body>
+  <div id="webamp"></div>
 
-<div id="webamp"></div>
+  <!-- Webamp JS bundle (stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/webamp@1.5.0/dist/webamp.bundle.min.js"></script>
 
-<script src="https://unpkg.com/webamp@latest/build/webamp.bundle.min.js"></script>
+  <script>
+    // If this ever fails, it means the script didn't load.
+    if (typeof window.Webamp !== "function") {
+      document.body.innerHTML = "<p style='font-family: monospace; padding: 16px;'>Webamp failed to load (script blocked or URL failed). Try Cmd+Shift+R or disable adblock.</p>";
+    } else {
+      const webamp = new window.Webamp({
+        initialTracks: [
+          {
+            metaData: { artist: "Plants & Animals", title: "ameasi" },
+            url: "https://plantsandanimals.github.io/webamp-player/ameasi.mp3"
+          },
+          {
+            metaData: { artist: "Plants & Animals", title: "bird" },
+            url: "https://plantsandanimals.github.io/webamp-player/bird.mp3"
+          },
+          {
+            metaData: { artist: "Plants & Animals", title: "choir" },
+            url: "https://plantsandanimals.github.io/webamp-player/choir.mp3"
+          },
+          {
+            metaData: { artist: "Plants & Animals", title: "don01" },
+            url: "https://plantsandanimals.github.io/webamp-player/don01.mp3"
+          },
+          {
+            metaData: { artist: "Plants & Animals", title: "likehell" },
+            url: "https://plantsandanimals.github.io/webamp-player/likehell.mp3"
+          },
+          {
+            metaData: { artist: "Plants & Animals", title: "wind" },
+            url: "https://plantsandanimals.github.io/webamp-player/wind.mp3"
+          }
+        ],
 
-<script>
-const webamp = new Webamp({
-  initialTracks: [
-    {
-      metaData: { artist: "Plants & Animals", title: "Ameasi" },
-      url: "https://plantsandanimals.github.io/webamp-player/ameasi.mp3"
-    },
-    {
-      metaData: { artist: "Plants & Animals", title: "Bird" },
-      url: "https://plantsandanimals.github.io/webamp-player/bird.mp3"
-    },
-    {
-      metaData: { artist: "Plants & Animals", title: "Choir" },
-      url: "https://plantsandanimals.github.io/webamp-player/choir.mp3"
-    },
-    {
-      metaData: { artist: "Plants & Animals", title: "Don 01" },
-      url: "https://plantsandanimals.github.io/webamp-player/don01.mp3"
-    },
-    {
-      metaData: { artist: "Plants & Animals", title: "Like Hell" },
-      url: "https://plantsandanimals.github.io/webamp-player/likehell.mp3"
-    },
-    {
-      metaData: { artist: "Plants & Animals", title: "Wind" },
-      url: "https://plantsandanimals.github.io/webamp-player/wind.mp3"
+        initialSkin: {
+          url: "https://plantsandanimals.github.io/webamp-player/Cannabis_Sativa.wsz"
+        }
+      });
+
+      webamp.renderWhenReady(document.getElementById("webamp"));
     }
-  ],
-
-  initialSkin: {
-    url: "https://plantsandanimals.github.io/webamp-player/Cannabis_Sativa.wsz"
-  }
-});
-
-webamp.renderWhenReady(document.getElementById("webamp"));
-</script>
-
+  </script>
 </body>
 </html>
