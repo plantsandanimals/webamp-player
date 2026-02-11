@@ -1,76 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Webamp Player</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webamp Player</title>
 
-  <!-- Webamp (correct CDN) -->
-  <link rel="stylesheet" href="https://unpkg.com/webamp@latest/dist/webamp.css" />
-  <script src="https://unpkg.com/webamp@latest/dist/webamp.bundle.min.js"></script>
+    <!-- Webamp CSS (working CDN) -->
+    <link rel="stylesheet" href="https://unpkg.com/webamp@latest/dist/webamp.css" />
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: black;
-    }
-
-    #webamp-container {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  </style>
-</head>
-
-<body>
-  <div id="webamp-container"></div>
-
-  <script>
-    const Webamp = window.Webamp;
-
-    const webamp = new Webamp({
-      initialTracks: [
-        { metaData: { title: "ameasi" }, url: "./ameasi.mp3" },
-        { metaData: { title: "bird" }, url: "./bird.mp3" },
-        { metaData: { title: "choir" }, url: "./choir.mp3" },
-        { metaData: { title: "don01" }, url: "./don01.mp3" },
-        { metaData: { title: "don02" }, url: "./don02.mp3" },
-        { metaData: { title: "don03" }, url: "./don03.mp3" },
-        { metaData: { title: "don04" }, url: "./don04.mp3" },
-        { metaData: { title: "don05" }, url: "./don05.mp3" },
-        { metaData: { title: "don06" }, url: "./don06.mp3" },
-        { metaData: { title: "don07" }, url: "./don07.mp3" },
-        { metaData: { title: "don08" }, url: "./don08.mp3" },
-        { metaData: { title: "don09" }, url: "./don09.mp3" },
-        { metaData: { title: "don10" }, url: "./don10.mp3" },
-        { metaData: { title: "don11" }, url: "./don11.mp3" },
-        { metaData: { title: "kat01" }, url: "./kat01.mp3" },
-        { metaData: { title: "likehell" }, url: "./likehell.mp3" },
-        { metaData: { title: "rua01" }, url: "./rua01.mp3" },
-        { metaData: { title: "rua02" }, url: "./rua02.mp3" },
-        { metaData: { title: "rua03" }, url: "./rua03.mp3" },
-        { metaData: { title: "select" }, url: "./select.mp3" },
-        { metaData: { title: "sup01" }, url: "./sup01.mp3" },
-        { metaData: { title: "tar01" }, url: "./tar01.mp3" },
-        { metaData: { title: "tar02" }, url: "./tar02.mp3" },
-        { metaData: { title: "tar03" }, url: "./tar03.mp3" },
-        { metaData: { title: "tar04" }, url: "./tar04.mp3" },
-        { metaData: { title: "tar05" }, url: "./tar05.mp3" },
-        { metaData: { title: "wan01" }, url: "./wan01.mp3" },
-        { metaData: { title: "wind" }, url: "./wind.mp3" }
-      ],
-
-      initialSkin: {
-        url: "./Weed_Amp_bulb_4.wsz"
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #000;
+        overflow: hidden;
       }
-    });
 
-    webamp.renderWhenReady(document.getElementById("webamp-container"));
-  </script>
-</body>
+      /* Fullscreen stage */
+      #webamp-container {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #000;
+      }
+
+      /*
+        Webamp itself is pixel-art sized; we SCALE it up to fit the screen.
+        This keeps it centered and removes "white borders" by making the page black.
+      */
+      #webamp {
+        transform-origin: center center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="webamp-container">
+      <div id="webamp"></div>
+    </div>
+
+    <!-- Webamp JS (working CDN) -->
+    <script src="https://unpkg.com/webamp@latest/dist/webamp.bundle.min.js"></script>
+
+    <script>
+      // --- IMPORTANT ---
+      // Put Weed_Amp_bulb_4.wsz in the SAME folder as this html on GitHub Pages.
+      // Same for your mp3 files.
+
+      const Webamp = window.Webamp;
+
+      function setScaleToFit() {
+        // Webamp classic window is fixed-size; scale it to fit viewport.
+        // 420x700 is a safe-ish "full stack" size (main + eq + playlist) that matches your use.
+        const BASE_W = 420;
+        const BASE_H = 700;
+
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+
+        // Scale up/down to fit while preserving aspect ratio
+        const scale = Math.min(vw / BASE_W, vh / BASE_H);
+
+        const el = document.getElementById("webamp");
+        el.style.transform = `scale(${scale})`;
+      }
+
+      const webamp = new Webamp({
+        initialTracks: [
+          // ONLY title -> playlist shows only the song name
+          { metaData: { title: "ameasi" }, url: "./ameasi.mp3" },
+          { metaData: { title: "bird" }, url: "./bird.mp3" },
+          { metaData: { title: "choir" }, url: "./choir.mp3" },
+          { metaData: { title: "don01" }, url: "./don01.mp3" },
+          { metaData: { title: "don02" }, url: "./don02.mp3" },
+          { metaData: { title: "don03" }, url: "./don03.mp3" },
+          { metaData: { title: "don04" }, url: "./don04.mp3" },
+          { metaData: { title: "don05" }, url: "./don05.mp3" },
+          { metaData: { title: "don06" }, url: "./don06.mp3" },
+          { metaData: { title: "don07" }, url: "./don07.mp3" },
+          { metaData: { title: "don08" }, url: "./don08.mp3" },
+          { metaData: { title: "don09" }, url: "./don09.mp3" },
+          { metaData: { title: "don10" }, url: "./don10.mp3" },
+          { metaData: { title: "don11" }, url: "./don11.mp3" },
+          { metaData: { title: "kat01" }, url: "./kat01.mp3" },
+          { metaData: { title: "likehell" }, url: "./likehell.mp3" },
+          { metaData: { title: "rua01" }, url: "./rua01.mp3" },
+          { metaData: { title: "rua02" }, url: "./rua02.mp3" },
+          { metaData: { title: "rua03" }, url: "./rua03.mp3" },
+          { metaData: { title: "select" }, url: "./select.mp3" },
+          { metaData: { title: "sup01" }, url: "./sup01.mp3" },
+          { metaData: { title: "tar01" }, url: "./tar01.mp3" },
+          { metaData: { title: "tar02" }, url: "./tar02.mp3" },
+          { metaData: { title: "tar03" }, url: "./tar03.mp3" },
+          { metaData: { title: "tar04" }, url: "./tar04.mp3" },
+          { metaData: { title: "tar05" }, url: "./tar05.mp3" },
+          { metaData: { title: "wan01" }, url: "./wan01.mp3" },
+          { metaData: { title: "wind" }, url: "./wind.mp3" },
+        ],
+        initialSkin: {
+          url: "./Weed_Amp_bulb_4.wsz",
+        },
+      });
+
+      webamp.renderWhenReady(document.getElementById("webamp"));
+
+      // scale after render + on resize
+      setTimeout(setScaleToFit, 300);
+      window.addEventListener("resize", setScaleToFit);
+    </script>
+  </body>
 </html>
