@@ -2,59 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Webamp</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Webamp Player</title>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/webamp@1.5.0/dist/webamp.min.css" />
-
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: transparent;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-    /* Force space for the player */
-    #webamp {
-      width: 480px;
-      height: 116px;
-    }
-  </style>
+  <!-- Webamp styles -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/webamp@latest/dist/webamp.css"
+  />
 </head>
 
-<body>
+<body style="margin:0; background:transparent; overflow:hidden;">
   <div id="webamp"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/webamp@1.5.0/dist/webamp.min.js"></script>
+  <!-- Webamp script -->
+  <script src="https://unpkg.com/webamp@latest/dist/webamp.bundle.min.js"></script>
 
   <script>
-    (async function () {
-      try {
-        console.log("Starting Webamp…");
-
-        const webamp = new window.Webamp({
-          initialTracks: [
-            {
-              metaData: { artist: "Test Track", title: "It Works" },
-              url: "https://archive.org/download/The_Entertainer_1902_Joplin/Scott_Joplin_-_The_Entertainer.mp3"
-            }
-          ],
-          initialSkin: { url: "Cannabis_Sativa.wsz" },
-          attachTo: document.getElementById("webamp")
-        });
-
-        await webamp.renderWhenReady();
-        console.log("Webamp rendered ✅");
-      } catch (e) {
-        console.error("Webamp failed ❌", e);
-        document.body.innerHTML =
-          "<pre style='padding:16px;font:14px/1.4 monospace;'>Webamp failed:\\n" +
-          (e && (e.stack || e.message) ? (e.stack || e.message) : String(e)) +
-          "</pre>";
+    const webamp = new Webamp({
+      initialTracks: [
+        {
+          metaData: {
+            artist: "Scott Joplin",
+            title: "The Entertainer"
+          },
+          url: "https://archive.org/download/The_Entertainer_1902_Joplin/Scott_Joplin_-_The_Entertainer.mp3"
+        }
+      ],
+      initialSkin: {
+        url: "https://plantsandanimals.github.io/webamp-player/Cannabis_Sativa.wsz"
       }
-    })();
+    });
+
+    webamp.renderWhenReady(document.getElementById("webamp"));
   </script>
 </body>
 </html>
