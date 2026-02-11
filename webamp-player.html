@@ -5,18 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Webamp Player</title>
 
+    <!-- REQUIRED: Webamp CSS (correct path) -->
+    <link rel="stylesheet" href="https://unpkg.com/webamp@1.5.0/dist/webamp.css" />
+
     <style>
-      html,
-      body {
+      html, body {
         margin: 0;
         padding: 0;
+        height: 100%;
         background: black;
         overflow: hidden;
       }
-      /* Set the size you want on the page */
+
+      /* Fullscreen container + centered */
       #webamp {
-        width: 480px;
-        height: 116px;
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     </style>
   </head>
@@ -24,55 +31,52 @@
   <body>
     <div id="webamp"></div>
 
-    <!-- IMPORTANT: correct Webamp bundle path -->
-    <script src="https://unpkg.com/webamp@1.5.0/built/webamp.bundle.min.js"></script>
+    <!-- REQUIRED: Webamp JS bundle (correct path) -->
+    <script src="https://unpkg.com/webamp@1.5.0/dist/webamp.bundle.min.js"></script>
 
     <script>
-      // Webamp constructor lives on window.Webamp
       const Webamp = window.Webamp;
 
       const webamp = new Webamp({
         initialTracks: [
-          { metaData: { artist: title: "ameasi" }, url: "./ameasi.mp3" },
-          { metaData: { artist: title: "bird" }, url: "./bird.mp3" },
-          { metaData: { artist: title: "choir" }, url: "./choir.mp3" },
+          { metaData: { title: "ameasi" }, url: "./ameasi.mp3" },
+          { metaData: { title: "bird" }, url: "./bird.mp3" },
+          { metaData: { title: "choir" }, url: "./choir.mp3" },
 
-          { metaData: { artist: title: "don01" }, url: "./don01.mp3" },
-          { metaData: { artist: title: "don02" }, url: "./don02.mp3" },
-          { metaData: { artist: title: "don03" }, url: "./don03.mp3" },
-          { metaData: { artist: title: "don04" }, url: "./don04.mp3" },
-          { metaData: { artist: title: "don05" }, url: "./don05.mp3" },
-          { metaData: { artist: title: "don06" }, url: "./don06.mp3" },
-          { metaData: { artist: title: "don07" }, url: "./don07.mp3" },
-          { metaData: { artist: title: "don08" }, url: "./don08.mp3" },
-          { metaData: { artist: title: "don09" }, url: "./don09.mp3" },
-          { metaData: { artist: title: "don10" }, url: "./don10.mp3" },
-          { metaData: { artist: title: "don11" }, url: "./don11.mp3" },
+          { metaData: { title: "don01" }, url: "./don01.mp3" },
+          { metaData: { title: "don02" }, url: "./don02.mp3" },
+          { metaData: { title: "don03" }, url: "./don03.mp3" },
+          { metaData: { title: "don04" }, url: "./don04.mp3" },
+          { metaData: { title: "don05" }, url: "./don05.mp3" },
+          { metaData: { title: "don06" }, url: "./don06.mp3" },
+          { metaData: { title: "don07" }, url: "./don07.mp3" },
+          { metaData: { title: "don08" }, url: "./don08.mp3" },
+          { metaData: { title: "don09" }, url: "./don09.mp3" },
+          { metaData: { title: "don10" }, url: "./don10.mp3" },
+          { metaData: { title: "don11" }, url: "./don11.mp3" },
 
-          { metaData: { artist: title: "kat01" }, url: "./kat01.mp3" },
-          { metaData: { artist: title: "likehell" }, url: "./likehell.mp3" },
+          { metaData: { title: "kat01" }, url: "./kat01.mp3" },
+          { metaData: { title: "likehell" }, url: "./likehell.mp3" },
 
-          { metaData: { artist: title: "rua01" }, url: "./rua01.mp3" },
-          { metaData: { artist: title: "rua02" }, url: "./rua02.mp3" },
-          { metaData: { artist: title: "rua03" }, url: "./rua03.mp3" },
+          { metaData: { title: "rua01" }, url: "./rua01.mp3" },
+          { metaData: { title: "rua02" }, url: "./rua02.mp3" },
+          { metaData: { title: "rua03" }, url: "./rua03.mp3" },
 
-          { metaData: { artist: title: "select" }, url: "./select.mp3" },
-          { metaData: { artist: title: "sup01" }, url: "./sup01.mp3" },
+          { metaData: { title: "select" }, url: "./select.mp3" },
+          { metaData: { title: "sup01" }, url: "./sup01.mp3" },
 
-          { metaData: { artist: title: "tar01" }, url: "./tar01.mp3" },
-          { metaData: { artist: title: "tar02" }, url: "./tar02.mp3" },
-          { metaData: { artist: title: "tar03" }, url: "./tar03.mp3" },
-          { metaData: { artist: title: "tar04" }, url: "./tar04.mp3" },
-          { metaData: { artist: title: "tar05" }, url: "./tar05.mp3" },
+          { metaData: { title: "tar01" }, url: "./tar01.mp3" },
+          { metaData: { title: "tar02" }, url: "./tar02.mp3" },
+          { metaData: { title: "tar03" }, url: "./tar03.mp3" },
+          { metaData: { title: "tar04" }, url: "./tar04.mp3" },
+          { metaData: { title: "tar05" }, url: "./tar05.mp3" },
 
-          { metaData: { artist: title: "wan01" }, url: "./wan01.mp3" },
-          { metaData: { artist: title: "wind" }, url: "./wind.mp3" },
+          { metaData: { title: "wan01" }, url: "./wan01.mp3" },
+          { metaData: { title: "wind" }, url: "./wind.mp3" }
         ],
 
-        // Use your local skin file (same folder)
-        initialSkin: {
-          url: "./Weed_Amp_bulb_4.wsz",
-        },
+        // Your local skin file (same folder)
+        initialSkin: { url: "./Weed_Amp_bulb_4.wsz" }
       });
 
       webamp.renderWhenReady(document.getElementById("webamp"));
