@@ -1,61 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Webamp Player</title>
 
-    <!-- ✅ WORKING Webamp CSS (unpkg 1.4.2) -->
-    <link rel="stylesheet" href="https://unpkg.com/webamp@1.4.2/built/webamp.css" />
-
     <style>
-      html, body {
+      html,
+      body {
         margin: 0;
         padding: 0;
         background: transparent;
         overflow: hidden;
       }
-      /* Optional: set the player size so it doesn't collapse */
+      /* Set the size you want on the page */
       #webamp {
-        width: 500px;
-        height: 520px;
-      }
-
-      /* A tiny error banner if scripts fail */
-      #err {
-        display: none;
-        font: 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-        padding: 10px 12px;
-        background: #111;
-        color: #ffe600;
+        width: 480px;
+        height: 116px;
       }
     </style>
   </head>
 
   <body>
-    <div id="err"></div>
     <div id="webamp"></div>
 
-    <!-- ✅ WORKING Webamp JS (unpkg 1.4.2) -->
-    <script src="https://unpkg.com/webamp@1.4.2/built/webamp.bundle.min.js"></script>
+    <!-- IMPORTANT: correct Webamp bundle path -->
+    <script src="https://unpkg.com/webamp@1.5.0/built/webamp.bundle.min.js"></script>
 
     <script>
-      (function () {
-        const err = document.getElementById("err");
+      // Webamp constructor lives on window.Webamp
+      const Webamp = window.Webamp;
 
-        // If Webamp didn't load, show a helpful message
-        if (!window.Webamp) {
-          err.style.display = "block";
-          err.textContent =
-            "Webamp failed to load. This is usually a browser extension/adblock blocking unpkg.com, or the CDN is blocked on your network. Try disabling extensions or using Safari.";
-          return;
-        }
-
-        // ✅ Your tracks (these files must be in the SAME repo folder as this HTML)
-        const tracks = [
+      const webamp = new Webamp({
+        initialTracks: [
           { metaData: { artist: "Plants & Animals", title: "ameasi" }, url: "./ameasi.mp3" },
           { metaData: { artist: "Plants & Animals", title: "bird" }, url: "./bird.mp3" },
           { metaData: { artist: "Plants & Animals", title: "choir" }, url: "./choir.mp3" },
@@ -90,23 +67,15 @@
 
           { metaData: { artist: "Plants & Animals", title: "wan01" }, url: "./wan01.mp3" },
           { metaData: { artist: "Plants & Animals", title: "wind" }, url: "./wind.mp3" },
-        ];
+        ],
 
-        const webamp = new window.Webamp({
-          initialTracks: tracks,
+        // Use your local skin file (same folder)
+        initialSkin: {
+          url: "./Cannabis_Sativa.wsz",
+        },
+      });
 
-          // ✅ Your skin file in the same folder:
-          initialSkin: { url: "./Cannabis_Sativa.wsz" },
-
-          // Optional: start with playlist visible
-          __initialWindowLayout: {
-            main: { position: { x: 0, y: 0 } },
-            playlist: { position: { x: 0, y: 116 } }
-          }
-        });
-
-        webamp.renderWhenReady(document.getElementById("webamp"));
-      })();
+      webamp.renderWhenReady(document.getElementById("webamp"));
     </script>
   </body>
 </html>
